@@ -1,0 +1,248 @@
+@import "reset"; /* On importe le fichier _reset.scss, sans le underscore et le .scss */
+@import "base";  /* On importe le fichier _base.scss, sans le underscore et le .scss */
+@import "utils"; /* On importe le fichier _utils.scss, sans le underscore et le .scss */
+@import "classes"; /* On importe le fichier _classes.scss, sans le underscore et le .scss */
+@import "animations"; /* On importe le fichier _animations.scss, sans le underscore et le .scss */
+@import "media-queries"; /* On importe le fichier _media-queries.scss, sans le underscore et le .scss */
+.grid-container {
+  display: grid; /* pour définir une grille CSS*/
+  /* Une grille va prendre l'intégralité de l'espace disponible, avec des colonnes et des lignes. */
+  grid: /* pour organiser notre grille => permet de définir des zones de grille nommées. */
+    "picture header" auto /* 1ière row : picture header */
+    /* => auto : pas besoin d'avoir une taille précise ou une répartition en fraction */
+    "aside main" 1fr      /* 2ième row : aside main */
+    "footer footer" auto  /* 3ième row : footer footer */
+    / 350px auto;         /* / [SLASH] 2 colonnes, 1 de 350px, l'autre "auto" */
+  @include xs { /* On inclut le mixin xs et on partage des propriétés entre différents éléments */
+    grid: /* pour organiser notre grille => permet de définir des zones de grille nommées. */
+    "header" auto         /* 1ière row : header */
+    "main" auto           /* 2ième row : main */
+    "picture" auto        /* 3ième row : picture */
+    "aside" auto          /* 4ième row : aside */
+    "footer" auto         /* 5ième row : footer */
+    / auto;               /* / [SLASH] 1 colonne "auto" */
+  }
+}
+/* On déclare les différents éléments qui vont composer notre grid-container */
+header {
+  grid-area: header; /* le header, a comme nom de zone, "header" */
+  background: linear-gradient(to right, var(--primary), var(--light));
+  /* Là, to right : on part de la gauche et on va vers la droite.
+     Par défaut, la direction du linear-gradient() est to bottom : du haut vers le bas. */
+  padding: 8rem 5rem; /* 8rem vertical | 5rem horizontal */
+  /* padding : différents écarts de remplissage sur les 4 côtés d'un élément. */
+  text-align: center; /* pour aligner le texte au centre horizontal */
+  color: white;
+  display: flex; /* pour rendre notre header flexible */
+  flex-direction: column; /* axe principal : vertical ou les colonnes */
+  justify-content: center; /* Contenu groupé au centre, selon l'axe principal vertical */
+  align-items: center;     /* Alignement des éléments au centre, selon l'axe secondaire horizontal */
+  @include xs { /* On inclut le mixin xs et on partage des propriétés entre différents éléments */
+    padding: 5rem 2rem; /* 5rem vertical | 2rem horizontal*/
+  }
+  h1 {
+    font-size: 6rem;   /* taille de la police ou du texte */
+    line-height: 8rem; /* hauteur minimale des lignes */
+    font-weight: 300;  /* le « poids » de la police */
+    letter-spacing: 3rem; /* espacement entre chaque lettre */
+    @include xs { /* On inclut le mixin xs et on partage des propriétés entre différents éléments */
+      font-size: 4rem; /* taille de la police ou du texte */
+    }
+  }
+  p {
+    letter-spacing: 0.5rem;/* espacement entre chaque lettre */
+  }
+  span { /* span = élément de type Inline. Sur ces éléments, les rotations ne vont pas marcher. */
+    display: inline-block; /* pour que l'animation fonctionne */
+    animation: bounce 2s;  /*Nom-animation + durée */
+  }
+}
+.picture {
+  grid-area: picture;/* l'image, a comme nom de zone, "picture" */
+  padding: 6rem;     /* padding : lécarts de remplissage sur les 4 côtés d'un élément */
+  background: var(--background);
+  border-right: 1px solid var(--border); /* bordure à droite, de 1 px, solide. */
+  img {
+    border-radius: 50%; /* pour définir des coins arrondis pour la bordure */
+  }
+}
+aside {
+  grid-area: aside;/* le aside, a comme nom de zone, "aside" */
+  background: var(--background);
+  border-right:1px solid var(--border); /* bordure à droite, de 1 px, solide. */
+  padding: 5rem;
+   /* padding : différents écarts de remplissage sur les 4 côtés d'un élément. */
+   min-height: 1500px; /* hauteur minimale */
+  .block {
+    margin-bottom: 5rem; /* marge en bas */
+    h3 {
+      margin-bottom: 0;  /* marge en bas */
+      font-size: 1.4rem; /* taille de la police ou du texte */
+    }
+    p {
+      margin: 0 0 2rem 0; /* 0 au top | 0 à droite | 2rem en bas | 0 à gauche */
+      font-style: italic;/* pour sélectionner une fonte italique */
+    }
+    .bar-skill {
+      margin: 2rem 0; /* 2rem vertical | 0 horizontal */
+      height: 5px;    /* hauteur */
+      background: var(--hint);
+      position: relative;
+      .bar-skill-progress {
+        position: absolute;
+        height: 5px;      /* hauteur */
+        top: 0;           /* partie top des éléments positionnés */
+        left: 0;          /* partie gauche des éléments positionnés */
+        width: 40%;       /* largeur = prend 40% de la largeur disponible */
+        background: var(--light);
+
+      }
+      .bar-skill-dot {
+        position: absolute;
+        height: 10px;     /* hauteur */
+        width: 10px;      /* largeur */
+        background: var(--dark);
+        left: calc(40% - 5px);/* partie gauche des éléments positionnés */
+        top: -2.5px;          /* partie top des éléments positionnés */
+        transform: rotate(45deg); /* pour faire une rotation de 45 degrés */
+      }
+    }
+    .stars-container {
+      display:flex;
+      margin: 2rem 0 3rem 0; /* 2rem top | 0 right | 3rem bottom | 0 left */
+      color: var(--hint);
+      i {
+        font-size: 2rem; /* taille de la police ou du texte */
+        margin: 0 1rem;  /* 0 vertical | 1rem horizontal */
+      }
+    }
+    .social-container {
+      display: flex;           /* pour rendre notre contenu flexible */
+      justify-content: start;  /* pour aligner le contenu au début horizontalement */
+      align-items: center;     /* pour centrer les éléments verticalement */
+      padding: 1rem 1rem;      /* 1rem vertical | 1rem horizontal */
+      border-radius: 5px;      /* définir des coins arrondis pour la bordure */
+      transition: all 0.2s;    /* toutes les propriétés subissent la transition, durée transition 0.2 sec */
+      cursor: pointer;         /* pour transformer le pointeur de la souris en "petite main" */
+      &:hover { /* le & permet de sélectionner le parent direct, ici le social-container */
+        background: var(--border);
+        i {
+          color: var(--primary);
+          transform: scale(1.3); /* agrandit l'échelle de notre icône social-media */
+          transition: all 0.2s;  /* toutes les propriétés subissent la transition, durée transition 0.2 sec */
+        }
+      }
+      i {
+        font-size: 2rem;       /* taille de la police ou du texte */
+        flex: 0 0 50px;        /* flex-grow, flex-shrink et flex-basis. */
+        margin-right: 1rem;    /* marge à droite */
+      }
+      p {
+        flex:auto;      /* pour rendre notre contenu flexible */
+        margin: 0;      /* pas de marge */
+      }
+    }
+   }
+}
+main {
+  grid-area: main;/* le main, a comme nom de zone, "main" */
+  padding: 5rem;  /* padding : différents écarts de remplissage sur les 4 côtés d'un élément. */
+  @include xs {   /* On inclut le mixin xs et on partage des propriétés entre différents éléments */
+    padding: 5rem 1.5rem; /* 5rem vertical | 1.5rem horizontal */
+  }
+  h2 {
+    margin-bottom: 4rem; /* marge en bas */
+  }
+  p {
+    letter-spacing: 0.1rem;/* espacement entre chaque lettre */
+    line-height: 3rem;     /* hauteur entre les lignes */
+  }
+  .experience {
+    display: flex;         /* pour rendre notre contenu flexible */
+    margin: 6rem 0;        /* 3rem vertical | 0 horizontal */
+    .timeline {
+      text-align: center;  /* pour centrer le texte */
+      color:var(--hint);
+      padding-right: 2rem; /* padding à droite */
+      border-right: 1px solid var(--border); /* bordure à droite */
+      p { 
+        margin: 0;         /* la propriété va s'appliquer sur les 4 côtés */
+      }
+    }
+    .content {
+      padding: 0 1rem; /* 0 vertical | 1rem horizontal */
+      h3 {
+        margin: 0;     /* la propriété va s'appliquer sur les 4 côtés */
+      }
+      p {
+        margin: 0;     /* la propriété va s'appliquer sur les 4 côtés */
+      }
+      ul {
+        margin: 2rem 0;     /* 2rem vertical | 0 horizontal */
+        list-style: circle; /*  puce en forme de gros point creux. */
+        padding-left: 4rem; /* padding à gauche */
+      }
+    }
+  }
+}
+footer {
+  grid-area: footer;/* le footer, a comme nom de zone, "footer" */
+  display: flex;    /* pour rendre notre contenu flexible */
+  flex-direction: column; /* axe principal : vertical ou les colonnes */
+  text-align: center;     /* pour centrer le texte, par rapport à l'axe principal */
+  justify-content: center;/* pour centrer le contenu, par rapport à l'axe principal */
+  align-items: center;    /* pour centrer les éléments, par rapport à l'axe secondaire */
+  color: white;
+  padding: 5rem;    /* padding : différents écarts de remplissage sur les 4 côtés d'un élément. */
+  @include xs {     /* On inclut le mixin xs et on partage des propriétés entre différents éléments */
+    padding: 5rem 1.5rem; /* 5rem vertical | 1.5rem horizontal */
+  }
+  background: var(--text);
+  h2 {
+    margin-bottom: 3rem;  /* marge en bas */
+  }
+  form {
+    display: flex;      /* pour rendre notre contenu flexible */
+    align-items: center;/* pour centrer les éléments verticalement */
+    .prefix {
+      background: linear-gradient(to right, var(--dark), var(--light));
+      /* On va vers la droite, on part sur var--dark, et on va sur var--light */
+      padding: 1rem 2rem; /* 1rem vertical | 2rem horizontal */
+      color: white;
+      font-size: 2rem; /* taille de la police ou du texte */
+      border-top-left-radius: 0.5rem;    /* rayon de courbure de la bordure pour le coin en haut à gauche */
+      border-bottom-left-radius: 0.5rem; /* rayon de courbure de la bordure pour le coin en bas à gauche */
+    }
+    button {
+      background: var(--text);
+      border: 0;            /* On retire la bordure */
+      cursor: pointer;      /* pour transformer le pointeur de la souris en "petite main" */
+      transition: all 0.2s; /* toutes les propriétés subissent la transition, durée transition 0.2 sec */
+      &:hover {             /* le & permet de sélectionner le parent direct, ici le bouton */
+        opacity: 0.8;         /* => quand on va passer la souris, le bouton aura une opacité de 0.8 */
+      }
+      .postfix {
+        background: linear-gradient(to right, var(--dark), var(--light));
+        /* On va vers la droite, on part sur var--dark, et on va sur var--light */
+        padding: 1rem 2rem; /* 1rem vertical | 2rem horizontal */
+        color: white;
+        font-size: 2rem; /* taille de la police ou du texte */
+        border-top-right-radius: 0.5rem;    /* rayon de courbure de la bordure pour le coin en haut à droite */
+        border-bottom-right-radius: 0.5rem; /* rayon de courbure de la bordure pour le coin en bas à droite */      
+      }
+    }
+    input {
+      outline: 0;        /* supprimera le style par défaut du navigateur pour le focus */
+      border: 0;         /* On retire la bordure */
+      min-width: 400px;  /* largeur minimale */
+      @include xs {      /* On inclut le mixin xs et on partage des propriétés entre différents éléments */
+        min-width: 200px;
+      }
+      padding: 1rem 2rem;/* 1rem vertical | 2rem horizontal */
+      line-height: 2rem; /* hauteur minimale entre les lignes : 2 rem */
+      &::placeholder {   /* le & permet de sélectionner le parent direct, ici le input */
+        color: var(--text);
+      }
+    }
+  }
+}

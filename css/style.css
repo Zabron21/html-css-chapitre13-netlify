@@ -1,0 +1,363 @@
+@charset "UTF-8";
+* { /* permet de sélectionner n'importe quel élément, quel que soit son type */
+  margin: 0; /* pas de marge */
+  padding: 0; /* pas de padding */
+  box-sizing: border-box; /* largeur et hauteur incluent les padding et border, mais pas les margin */
+}
+
+/* On importe le fichier _reset.scss, sans le underscore et le .scss */ /* fichier où on va mettre le CSS directement sur les tags <html> */
+html {
+  font-size: 62.5%; /* taille de la police ou du texte <=> 62.5% de 16px = 10 pixels */
+}
+
+body {
+  font-family: var(--font-family); /* police pour les articles */
+  color: var(--text);
+  font-size: 1.6rem; /* taille de la police ou du texte */
+}
+
+p {
+  margin: 1rem 0; /* 1rem vertical | 0 horizontal */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 1rem 0 2rem 0; /* 1rem en haut, 0 à droite, 2rem en bas, 0 à gauche */
+}
+
+ul {
+  list-style: none; /* Pas de petits ronds ou de puces dans les listes */
+}
+
+a {
+  color: var(--text); /* On ne veut pas la couleur bleue par défaut d'un lien */
+  text-decoration: none; /* Pas de soulignagne sur nos liens */
+}
+
+img {
+  max-width: 100%; /* largeur maximum de l'image : 100 % */
+}
+
+/* On importe le fichier _base.scss, sans le underscore et le .scss */
+/* on va mettre des classes utilitaires */
+.mb-5 { /* m = margin, b = bottom, 5 = valeur que l'on va donner au margin-bottom */
+  margin-bottom: 5rem !important;
+} /* !important indique que cette règle CSS a priorité sur les autres règles */
+.mb-2 { /* m = margin, b = bottom, 2 = valeur que l'on va donner au margin-bottom */
+  margin-bottom: 2rem !important;
+}
+
+/* On importe le fichier _utils.scss, sans le underscore et le .scss */
+/* pour mettre en place les classes génériques */
+.title-small { /* le & fait référence au parent direct de title */
+  letter-spacing: 0.5rem; /* espacement entre chaque lettre */
+  font-size: 1.7rem; /* taille de la police ou du texte */
+}
+
+.text-primary {
+  color: var(--primary);
+}
+.text-hint {
+  color: var(--hint);
+}
+
+/* On importe le fichier _classes.scss, sans le underscore et le .scss */
+/* Définition de l'animation "bounce" */
+@keyframes bounce { /*Après @keyframes, on met le nom de l'animation */
+  0% { /* 0% = from = le début = le point de départ */
+    transform: rotate(-45deg);
+  }
+  10% {
+    transform: rotate(-35deg);
+  }
+  70% {
+    transform: rotate(20deg);
+  }
+  80% {
+    transform: rotate(-10deg);
+  }
+  90% {
+    transform: rotate(5deg);
+  }
+  100% { /* 100% = to = la fin = le point d'arrivée */
+    transform: rotate(0deg);
+  }
+}
+/* On importe le fichier _animations.scss, sans le underscore et le .scss */
+/* On va définir les principales media queries */
+/* @media : on va écrire une Media querie */
+/* Sur les vieux Navigateurs, la règle CSS avec la Media querie ne sera pas appliquée.
+Le only screen and permettra de se protéger des vieux navigateurs .*/
+/* Pour les téléphones => Landscape phones and down ----------- */
+/* Pour les téléphones en mode "landscape" et les tablettes en mode "portrait" 
+  => Landscape phone to portrait tablet ----------- */
+/* Pour les tablettes en mode "landscape", et les ordinateurs portables 
+  => Portrait tablet to landscape, and desktop ----------- */
+/* Pour les écrans d'ordinateur qui sont larges : Large desktop */
+/* On importe le fichier _media-queries.scss, sans le underscore et le .scss */
+.grid-container {
+  display: grid; /* pour définir une grille CSS*/
+  /* Une grille va prendre l'intégralité de l'espace disponible, avec des colonnes et des lignes. */
+  grid: "picture header" auto "aside main" 1fr "footer footer" auto/350px auto; /* / [SLASH] 2 colonnes, 1 de 350px, l'autre "auto" */
+  /* Pour déclarer 1 mixin : @mixin + nom-du-mixin */
+}
+@media (max-width: 480px) {
+  .grid-container {
+    /* Si on a une taille < 480px, alors on exécute le code à l'intérieur des accolades. */
+    /* On inclut le mixin xs et on partage des propriétés entre différents éléments */
+    grid: "header" auto "main" auto "picture" auto "aside" auto "footer" auto/auto; /* / [SLASH] 1 colonne "auto" */
+  }
+}
+
+/* On déclare les différents éléments qui vont composer notre grid-container */
+header {
+  grid-area: header; /* le header, a comme nom de zone, "header" */
+  background: linear-gradient(to right, var(--primary), var(--light));
+  /* Là, to right : on part de la gauche et on va vers la droite.
+     Par défaut, la direction du linear-gradient() est to bottom : du haut vers le bas. */
+  padding: 8rem 5rem; /* 8rem vertical | 5rem horizontal */
+  /* padding : différents écarts de remplissage sur les 4 côtés d'un élément. */
+  text-align: center; /* pour aligner le texte au centre horizontal */
+  color: white;
+  display: flex; /* pour rendre notre header flexible */
+  flex-direction: column; /* axe principal : vertical ou les colonnes */
+  justify-content: center; /* Contenu groupé au centre, selon l'axe principal vertical */
+  align-items: center; /* Alignement des éléments au centre, selon l'axe secondaire horizontal */
+  /* Pour déclarer 1 mixin : @mixin + nom-du-mixin */
+}
+@media (max-width: 480px) {
+  header {
+    /* Si on a une taille < 480px, alors on exécute le code à l'intérieur des accolades. */
+    /* On inclut le mixin xs et on partage des propriétés entre différents éléments */
+    padding: 5rem 2rem; /* 5rem vertical | 2rem horizontal*/
+  }
+}
+header h1 {
+  font-size: 6rem; /* taille de la police ou du texte */
+  line-height: 8rem; /* hauteur minimale des lignes */
+  font-weight: 300; /* le « poids » de la police */
+  letter-spacing: 3rem; /* espacement entre chaque lettre */
+  /* Pour déclarer 1 mixin : @mixin + nom-du-mixin */
+}
+@media (max-width: 480px) {
+  header h1 {
+    /* Si on a une taille < 480px, alors on exécute le code à l'intérieur des accolades. */
+    /* On inclut le mixin xs et on partage des propriétés entre différents éléments */
+    font-size: 4rem; /* taille de la police ou du texte */
+  }
+}
+header p {
+  letter-spacing: 0.5rem; /* espacement entre chaque lettre */
+}
+header span { /* span = élément de type Inline. Sur ces éléments, les rotations ne vont pas marcher. */
+  display: inline-block; /* pour que l'animation fonctionne */
+  animation: bounce 2s; /*Nom-animation + durée */
+}
+
+.picture {
+  grid-area: picture; /* l'image, a comme nom de zone, "picture" */
+  padding: 6rem; /* padding : lécarts de remplissage sur les 4 côtés d'un élément */
+  background: var(--background);
+  border-right: 1px solid var(--border); /* bordure à droite, de 1 px, solide. */
+}
+.picture img {
+  border-radius: 50%; /* pour définir des coins arrondis pour la bordure */
+}
+
+aside {
+  grid-area: aside; /* le aside, a comme nom de zone, "aside" */
+  background: var(--background);
+  border-right: 1px solid var(--border); /* bordure à droite, de 1 px, solide. */
+  padding: 5rem;
+  /* padding : différents écarts de remplissage sur les 4 côtés d'un élément. */
+  min-height: 1500px; /* hauteur minimale */
+}
+aside .block {
+  margin-bottom: 5rem; /* marge en bas */
+}
+aside .block h3 {
+  margin-bottom: 0; /* marge en bas */
+  font-size: 1.4rem; /* taille de la police ou du texte */
+}
+aside .block p {
+  margin: 0 0 2rem 0; /* 0 au top | 0 à droite | 2rem en bas | 0 à gauche */
+  font-style: italic; /* pour sélectionner une fonte italique */
+}
+aside .block .bar-skill {
+  margin: 2rem 0; /* 2rem vertical | 0 horizontal */
+  height: 5px; /* hauteur */
+  background: var(--hint);
+  position: relative;
+}
+aside .block .bar-skill .bar-skill-progress {
+  position: absolute;
+  height: 5px; /* hauteur */
+  top: 0; /* partie top des éléments positionnés */
+  left: 0; /* partie gauche des éléments positionnés */
+  width: 40%; /* largeur = prend 40% de la largeur disponible */
+  background: var(--light);
+}
+aside .block .bar-skill .bar-skill-dot {
+  position: absolute;
+  height: 10px; /* hauteur */
+  width: 10px; /* largeur */
+  background: var(--dark);
+  left: calc(40% - 5px); /* partie gauche des éléments positionnés */
+  top: -2.5px; /* partie top des éléments positionnés */
+  transform: rotate(45deg); /* pour faire une rotation de 45 degrés */
+}
+aside .block .stars-container {
+  display: flex;
+  margin: 2rem 0 3rem 0; /* 2rem top | 0 right | 3rem bottom | 0 left */
+  color: var(--hint);
+}
+aside .block .stars-container i {
+  font-size: 2rem; /* taille de la police ou du texte */
+  margin: 0 1rem; /* 0 vertical | 1rem horizontal */
+}
+aside .block .social-container {
+  display: flex; /* pour rendre notre contenu flexible */
+  justify-content: start; /* pour aligner le contenu au début horizontalement */
+  align-items: center; /* pour centrer les éléments verticalement */
+  padding: 1rem 1rem; /* 1rem vertical | 1rem horizontal */
+  border-radius: 5px; /* définir des coins arrondis pour la bordure */
+  transition: all 0.2s; /* toutes les propriétés subissent la transition, durée transition 0.2 sec */
+  cursor: pointer; /* pour transformer le pointeur de la souris en "petite main" */
+}
+aside .block .social-container:hover { /* le & permet de sélectionner le parent direct, ici le social-container */
+  background: var(--border);
+}
+aside .block .social-container:hover i {
+  color: var(--primary);
+  transform: scale(1.3); /* agrandit l'échelle de notre icône social-media */
+  transition: all 0.2s; /* toutes les propriétés subissent la transition, durée transition 0.2 sec */
+}
+aside .block .social-container i {
+  font-size: 2rem; /* taille de la police ou du texte */
+  flex: 0 0 50px; /* flex-grow, flex-shrink et flex-basis. */
+  margin-right: 1rem; /* marge à droite */
+}
+aside .block .social-container p {
+  flex: auto; /* pour rendre notre contenu flexible */
+  margin: 0; /* pas de marge */
+}
+
+main {
+  grid-area: main; /* le main, a comme nom de zone, "main" */
+  padding: 5rem; /* padding : différents écarts de remplissage sur les 4 côtés d'un élément. */
+  /* Pour déclarer 1 mixin : @mixin + nom-du-mixin */
+}
+@media (max-width: 480px) {
+  main {
+    /* Si on a une taille < 480px, alors on exécute le code à l'intérieur des accolades. */
+    /* On inclut le mixin xs et on partage des propriétés entre différents éléments */
+    padding: 5rem 1.5rem; /* 5rem vertical | 1.5rem horizontal */
+  }
+}
+main h2 {
+  margin-bottom: 4rem; /* marge en bas */
+}
+main p {
+  letter-spacing: 0.1rem; /* espacement entre chaque lettre */
+  line-height: 3rem; /* hauteur entre les lignes */
+}
+main .experience {
+  display: flex; /* pour rendre notre contenu flexible */
+  margin: 6rem 0; /* 3rem vertical | 0 horizontal */
+}
+main .experience .timeline {
+  text-align: center; /* pour centrer le texte */
+  color: var(--hint);
+  padding-right: 2rem; /* padding à droite */
+  border-right: 1px solid var(--border); /* bordure à droite */
+}
+main .experience .timeline p {
+  margin: 0; /* la propriété va s'appliquer sur les 4 côtés */
+}
+main .experience .content {
+  padding: 0 1rem; /* 0 vertical | 1rem horizontal */
+}
+main .experience .content h3 {
+  margin: 0; /* la propriété va s'appliquer sur les 4 côtés */
+}
+main .experience .content p {
+  margin: 0; /* la propriété va s'appliquer sur les 4 côtés */
+}
+main .experience .content ul {
+  margin: 2rem 0; /* 2rem vertical | 0 horizontal */
+  list-style: circle; /*  puce en forme de gros point creux. */
+  padding-left: 4rem; /* padding à gauche */
+}
+
+footer {
+  grid-area: footer; /* le footer, a comme nom de zone, "footer" */
+  display: flex; /* pour rendre notre contenu flexible */
+  flex-direction: column; /* axe principal : vertical ou les colonnes */
+  text-align: center; /* pour centrer le texte, par rapport à l'axe principal */
+  justify-content: center; /* pour centrer le contenu, par rapport à l'axe principal */
+  align-items: center; /* pour centrer les éléments, par rapport à l'axe secondaire */
+  color: white;
+  padding: 5rem; /* padding : différents écarts de remplissage sur les 4 côtés d'un élément. */
+  /* Pour déclarer 1 mixin : @mixin + nom-du-mixin */
+  background: var(--text);
+}
+@media (max-width: 480px) {
+  footer {
+    /* Si on a une taille < 480px, alors on exécute le code à l'intérieur des accolades. */
+    /* On inclut le mixin xs et on partage des propriétés entre différents éléments */
+    padding: 5rem 1.5rem; /* 5rem vertical | 1.5rem horizontal */
+  }
+}
+footer h2 {
+  margin-bottom: 3rem; /* marge en bas */
+}
+footer form {
+  display: flex; /* pour rendre notre contenu flexible */
+  align-items: center; /* pour centrer les éléments verticalement */
+}
+footer form .prefix {
+  background: linear-gradient(to right, var(--dark), var(--light));
+  /* On va vers la droite, on part sur var--dark, et on va sur var--light */
+  padding: 1rem 2rem; /* 1rem vertical | 2rem horizontal */
+  color: white;
+  font-size: 2rem; /* taille de la police ou du texte */
+  border-top-left-radius: 0.5rem; /* rayon de courbure de la bordure pour le coin en haut à gauche */
+  border-bottom-left-radius: 0.5rem; /* rayon de courbure de la bordure pour le coin en bas à gauche */
+}
+footer form button {
+  background: var(--text);
+  border: 0; /* On retire la bordure */
+  cursor: pointer; /* pour transformer le pointeur de la souris en "petite main" */
+  transition: all 0.2s; /* toutes les propriétés subissent la transition, durée transition 0.2 sec */
+}
+footer form button:hover { /* le & permet de sélectionner le parent direct, ici le bouton */
+  opacity: 0.8; /* => quand on va passer la souris, le bouton aura une opacité de 0.8 */
+}
+footer form button .postfix {
+  background: linear-gradient(to right, var(--dark), var(--light));
+  /* On va vers la droite, on part sur var--dark, et on va sur var--light */
+  padding: 1rem 2rem; /* 1rem vertical | 2rem horizontal */
+  color: white;
+  font-size: 2rem; /* taille de la police ou du texte */
+  border-top-right-radius: 0.5rem; /* rayon de courbure de la bordure pour le coin en haut à droite */
+  border-bottom-right-radius: 0.5rem; /* rayon de courbure de la bordure pour le coin en bas à droite */
+}
+footer form input {
+  outline: 0; /* supprimera le style par défaut du navigateur pour le focus */
+  border: 0; /* On retire la bordure */
+  min-width: 400px; /* largeur minimale */
+  /* Pour déclarer 1 mixin : @mixin + nom-du-mixin */
+  padding: 1rem 2rem; /* 1rem vertical | 2rem horizontal */
+  line-height: 2rem; /* hauteur minimale entre les lignes : 2 rem */
+}
+@media (max-width: 480px) {
+  footer form input {
+    /* Si on a une taille < 480px, alors on exécute le code à l'intérieur des accolades. */
+    /* On inclut le mixin xs et on partage des propriétés entre différents éléments */
+    min-width: 200px;
+  }
+}
+footer form input::placeholder { /* le & permet de sélectionner le parent direct, ici le input */
+  color: var(--text);
+}
+
+/*# sourceMappingURL=style.css.map */

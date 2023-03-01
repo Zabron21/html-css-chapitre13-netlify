@@ -1,0 +1,21 @@
+/* Définition de l'animation "bounce" */
+@keyframes bounce { /*Après @keyframes, on met le nom de l'animation */
+  0% { /* 0% = from = le début = le point de départ */
+    transform: rotate(-45deg);
+  }
+  10% {
+    transform: rotate(-35deg);
+  }
+  70% {
+    transform: rotate(20deg);
+  }
+  80% {
+    transform: rotate(-10deg);
+  }
+  90% {
+    transform: rotate(5deg);
+  }
+  100% { /* 100% = to = la fin = le point d'arrivée */
+    transform: rotate(0deg);
+  }
+}

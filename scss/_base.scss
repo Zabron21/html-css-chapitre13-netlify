@@ -1,0 +1,26 @@
+/* fichier où on va mettre le CSS directement sur les tags <html> */
+html {
+  font-size: 62.5%; /* taille de la police ou du texte <=> 62.5% de 16px = 10 pixels */
+}
+body {
+  font-family: var(--font-family);/* police pour les articles */
+  color: var(--text);
+  font-size: 1.6rem;/* taille de la police ou du texte */
+}
+
+p {
+  margin: 1rem 0; /* 1rem vertical | 0 horizontal */
+}
+h1, h2, h3, h4, h5, h6 {
+  margin: 1rem 0 2rem 0; /* 1rem en haut, 0 à droite, 2rem en bas, 0 à gauche */
+}
+ul {
+  list-style: none;/* Pas de petits ronds ou de puces dans les listes */
+}
+a {
+  color: var(--text); /* On ne veut pas la couleur bleue par défaut d'un lien */
+  text-decoration: none;/* Pas de soulignagne sur nos liens */
+}
+img {
+  max-width: 100%; /* largeur maximum de l'image : 100 % */
+}

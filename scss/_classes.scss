@@ -1,0 +1,15 @@
+/* pour mettre en place les classes génériques */
+.title {
+  &-small { /* le & fait référence au parent direct de title */
+    letter-spacing: 0.5rem; /* espacement entre chaque lettre */
+    font-size: 1.7rem;      /* taille de la police ou du texte */
+  }
+}
+.text {
+  &-primary {
+    color: var(--primary);
+  }
+  &-hint {
+    color: var(--hint);
+  }
+}

@@ -1,0 +1,13 @@
+@charset "UTF-8";
+:root {
+  --font-family: "Mulish", sans-serif;
+  --light: #00c3ff; /* -- + nom-variable : valeur-variable => ici, on a déclaré la variable "light" */
+  --primary:#2071e7;
+  --dark:#2980b9;
+  --text:#333;
+  --background:#fafafa;
+  --hint:#999;
+  --border: #ddd;
+}
+
+/*# sourceMappingURL=variables.css.map */

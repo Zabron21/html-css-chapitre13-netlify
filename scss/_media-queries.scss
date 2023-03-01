@@ -1,0 +1,35 @@
+/* On va définir les principales media queries */
+  /* @media : on va écrire une Media querie */
+  /* Sur les vieux Navigateurs, la règle CSS avec la Media querie ne sera pas appliquée.
+  Le only screen and permettra de se protéger des vieux navigateurs .*/
+
+/* Pour les téléphones => Landscape phones and down ----------- */
+@mixin xs { /* Pour déclarer 1 mixin : @mixin + nom-du-mixin */
+  @media (max-width : 480px) { 
+  /* Si on a une taille < 480px, alors on exécute le code à l'intérieur des accolades. */
+    @content;
+  }
+}
+/* Pour les téléphones en mode "landscape" et les tablettes en mode "portrait" 
+  => Landscape phone to portrait tablet ----------- */
+@mixin sm { /* Pour déclarer 1 mixin : @mixin + nom-du-mixin */
+  @media (max-width : 767px) {
+  /* Si on a une taille < 767px, alors on exécute le code à l'intérieur des accolades. */
+    @content;
+  }
+}
+/* Pour les tablettes en mode "landscape", et les ordinateurs portables 
+  => Portrait tablet to landscape, and desktop ----------- */
+@mixin md { /* Pour déclarer 1 mixin : @mixin + nom-du-mixin */
+  @media (min-width:768px) and (max-width : 979px) {
+  /* Si on a une taille entre 768px et < 979px, alors on exécute le code à l'intérieur des accolades. */
+    @content;
+  }
+}
+/* Pour les écrans d'ordinateur qui sont larges : Large desktop */
+@mixin xl {
+  @media (min-width:1200px){
+  /* Si on a une taille > ou = 1200px, alors on exécute le code à l'intérieur des accolades. */
+    @content;
+  }
+}

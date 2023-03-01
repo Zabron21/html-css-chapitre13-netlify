@@ -1,0 +1,5 @@
+* { /* permet de sélectionner n'importe quel élément, quel que soit son type */
+  margin: 0; /* pas de marge */
+  padding: 0;/* pas de padding */
+  box-sizing: border-box; /* largeur et hauteur incluent les padding et border, mais pas les margin */
+}
